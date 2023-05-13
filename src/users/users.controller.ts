@@ -7,6 +7,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../auth/roles-auth.decorator';
 import { UserRoles } from '../constants/roles';
 import { RolesGuard } from '../auth/roles.guard';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -28,5 +29,15 @@ export class UsersController {
   @Get()
   getAll() {
     return this.usersService.getAllUsers();
+  }
+
+  @ApiOperation({ summary: 'Выдача роли для пользователя' })
+  @ApiResponse({ status: 200 })
+  @Roles(UserRoles.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(JwtAuthGuard)
+  @Post('/role')
+  addRole(@Body() dto: AddRoleDto) {
+    return this.usersService.addRole(dto);
   }
 }
