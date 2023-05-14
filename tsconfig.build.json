@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "types": ["node", "express", "multer"]
+  },
   "extends": "./tsconfig.json",
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

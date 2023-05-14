@@ -7,6 +7,15 @@ import { RolesModule } from './roles/roles.module';
 import { UserRoles } from './roles/user-roles.model';
 import { Role } from './roles/roles.model';
 import { AuthModule } from './auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
+import { SubcategoriesModule } from './subcategories/subcategories.module';
+import { ProductModule } from './product/product.module';
+import { Category } from './categories/categories.model';
+import { Subcategory } from './subcategories/subcategories.model';
+import { Product } from './product/product.model';
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   controllers: [],
@@ -25,9 +34,14 @@ import { AuthModule } from './auth/auth.module';
       models: [User, Role, UserRoles],
       autoLoadModels: true,
     }),
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
     UsersModule,
     RolesModule,
     AuthModule,
+    CategoriesModule,
+    SubcategoriesModule,
+    ProductModule,
+    FilesModule,
   ],
 })
 export class AppModule {}
